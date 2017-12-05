@@ -1,7 +1,7 @@
-'use strict';
+import { QueryInterface, SequelizeStatic } from 'sequelize';
 
-module.exports = {
-  up: (queryInterface, Sequelize) => {
+export = {
+  up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -11,7 +11,7 @@ module.exports = {
     */
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

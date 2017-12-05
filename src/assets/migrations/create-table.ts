@@ -1,7 +1,7 @@
-'use strict';
+import { QueryInterface, SequelizeStatic } from 'sequelize';
 
-module.exports = {
-    up: (queryInterface, Sequelize) => {
+export = {
+    up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
         return queryInterface.createTable('<%= tableName %>', {
             id: {
                 allowNull: false,
@@ -14,7 +14,7 @@ module.exports = {
             <%= attribute.fieldName %>: {
                 type: Sequelize.<%= attribute.dataFunction ? `${attribute.dataFunction.toUpperCase()}(Sequelize.${attribute.dataType.toUpperCase()})` : attribute.dataType.toUpperCase() %>
             },
-            <% }) %>
+        <% }) %>
 
             <%= createdAt %>: {
                 allowNull: false,
@@ -28,7 +28,7 @@ module.exports = {
         });
     },
 
-    down: (queryInterface, Sequelize) => {
+    down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
         return queryInterface.dropTable('<%= tableName %>');
     }
 };

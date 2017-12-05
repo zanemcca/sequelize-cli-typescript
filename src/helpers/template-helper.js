@@ -6,8 +6,10 @@ module.exports = {
   render (path, locals, options) {
     options = _.assign({
       beautify: true,
-      indent_size: 2,
-      preserve_newlines: false
+      indent_size: 4,
+      preserve_newlines: true,
+      max_preserve_newlines: 2,
+      end_with_newline: true
     }, options || {});
 
     const template = helpers.asset.read(path);

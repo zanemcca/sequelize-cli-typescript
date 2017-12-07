@@ -40,6 +40,12 @@ export function getMigrator (type, args) {
       process.exit(1);
     }
 
+    let migratorPath = helpers.path.getPath(type);
+
+    if ( type === 'migration' ) {
+      migratorPath = helpers.path.getMigrationsCompiledPath();
+    }
+
     const sequelize = getSequelizeInstance();
     const migrator = new Umzug({
       storage: helpers.umzug.getStorage(type),
@@ -47,7 +53,7 @@ export function getMigrator (type, args) {
       logging: helpers.view.log,
       migrations: {
         params: [sequelize.getQueryInterface(), Sequelize],
-        path: helpers.path.getPath(type),
+        path: migratorPath,
         pattern: /\.js$/,
         wrap: fun => {
           if (fun.length === 3) {

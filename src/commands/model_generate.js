@@ -35,7 +35,7 @@ exports.handler = function (args) {
   );
   helpers.view.log(
     'New migration was created at',
-    clc.blueBright(helpers.path.getMigrationPath(args.name)),
+    clc.blueBright(helpers.path.getMigrationSourcePath(args.name)),
     '.'
   );
 
@@ -53,11 +53,19 @@ function ensureModelsFolder () {
 }
 
 function ensureMigrationsFolder () {
-  if (!helpers.path.existsSync(helpers.path.getPath('migration'))) {
+  if (!helpers.path.existsSync(helpers.path.getMigrationsSourcePath())) {
     helpers.view.error(
-      'Unable to find migrations path (' +
-      helpers.path.getPath('migration') +
+      'Unable to find migrations (source) path (' +
+      helpers.path.getMigrationsSourcePath() +
       '). Did you run ' + clc.blueBright('sequelize init') + '?'
+    );
+  }
+
+  if (!helpers.path.existsSync(helpers.path.getMigrationsCompiledPath())) {
+    helpers.view.error(
+      'Unable to find migrations (compiled) path (' +
+      helpers.path.getMigrationsCompiledPath() +
+      '). Did you compile your migrations?'
     );
   }
 }
